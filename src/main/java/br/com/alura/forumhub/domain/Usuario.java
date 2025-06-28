@@ -1,5 +1,6 @@
 package br.com.alura.forumhub.domain;
 
+import br.com.alura.forumhub.dto.DadosCadastroUsuario;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,6 +10,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 @Builder
 public class Usuario {
     @Id
@@ -18,4 +20,9 @@ public class Usuario {
     private String nome;
     @Column(nullable = false, unique = true)
     private String email;
+
+    public Usuario(DadosCadastroUsuario dadosCadastroUsuario) {
+        this.nome = dadosCadastroUsuario.nome();
+        this.email = dadosCadastroUsuario.email();
+    }
 }
